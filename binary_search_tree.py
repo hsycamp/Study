@@ -1,3 +1,6 @@
+import random as rd
+
+
 class TreeNode:
     def __init__(self, key, val, left=None, right=None, parent=None):
         self.key = key
@@ -215,3 +218,44 @@ class BinarySearchTree:
 
     def __str__(self):
         return str(self.to_list())
+
+
+# Test Function
+
+def test():
+    for i in range(30):
+        n = rd.randint(1, 10)
+        nodes = rd.sample(range(0, 100), n)
+        bst = BinarySearchTree()
+
+        for node in nodes:
+            bst[node] = node
+        print('-' * 50)
+        print(nodes)
+        print("K C L R")
+        bst.root.print_all()
+        delNodes = rd.sample(nodes, rd.randint(1, n))
+        rd.shuffle(delNodes)
+        print(delNodes)
+        print()
+
+        for delNode in delNodes:
+            print('Delete', delNode)
+            print("="*10)
+            bst.delete(delNode)
+            print("K C L R")
+            if bst.root:
+                bst.root.print_all()
+                print('current length:', len(bst))
+            else:
+                print('All deleted')
+            print()
+
+        if bst.root:
+            print("K C L R")
+            bst.root.print_all()
+        print()
+
+
+if __name__ == '__main__':
+    test()
